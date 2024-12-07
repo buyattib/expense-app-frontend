@@ -29,7 +29,15 @@
 		--chart-3: 197 37% 24%;
 		--chart-4: 43 74% 66%;
 		--chart-5: 27 87% 67%;
-		--radius: 0.5rem;
+		--success: 121 53% 70%;
+		--success-foreground: 121 53% 14%;
+		--error: 0 70% 65%;
+		--error-foreground: 0 70% 50%;
+		--warning: 40 95.8% 53.1%;
+		--warning-foreground: 40 95.8% 20%;
+		--info: 213 93.9% 67.8%;
+		--info-foreground: 213 93.9% 20%;
+		--radius: 1rem;
 	}
 	.dark {
 		--background: 0 0% 3.9%;

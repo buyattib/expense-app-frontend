@@ -1,16 +1,18 @@
 import { Toaster } from '@/components/ui/sonner'
 
-import { ThemeProvider } from './context'
+import { ErrorBoundary } from '@/components/error-boundary'
+
+import { ProviderComposer } from './context'
 import { Router } from './router'
 
 function App() {
 	return (
-		<div className='h-[100dvh]'>
-			<ThemeProvider defaultTheme='light' storageKey='ui-theme'>
+		<ErrorBoundary>
+			<ProviderComposer>
 				<Router />
-				<Toaster />
-			</ThemeProvider>
-		</div>
+				<Toaster richColors={true} />
+			</ProviderComposer>
+		</ErrorBoundary>
 	)
 }
 

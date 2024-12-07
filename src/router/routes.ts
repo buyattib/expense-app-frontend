@@ -1,10 +1,11 @@
 export const PUBLIC_ROUTES = {
 	LOGIN: '/login',
-	CONFIRM: '/confirm',
+	EMAIL_SENT: '/email-sent',
+	CONFIRM: '/confirm/:authType',
 } as const
 
 export const PRIVATE_ROUTES = {
 	INDEX: '/',
-	HOME: '/home',
+	DASHBOARD: '/dashboard',
 	SETTINGS: '/settings',
 } as const
