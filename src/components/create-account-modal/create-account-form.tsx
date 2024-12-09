@@ -52,8 +52,11 @@ export function CreateAccountForm({ onSuccess }: CreateAccountFormProps) {
 
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-6'>
-				<div className='grid grid-cols-2 gap-x-4'>
+			<form
+				onSubmit={form.handleSubmit(onSubmit)}
+				className='flex flex-col gap-6 justify-between'
+			>
+				<div className='grid md:grid-cols-2 grid-cols-1 gap-x-4'>
 					<CustomFormInput
 						control={form.control}
 						name='name'

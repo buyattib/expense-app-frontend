@@ -18,3 +18,5 @@ export {
 export { transactionCategoryAdapter, transactionAdapter } from './adapters'
 
 export { transactionCategoryCreateSchema, transactionCreateSchema } from './schemas'
+
+export { TRANSACTION_TYPE, TransactionTypeEnum } from './constants'

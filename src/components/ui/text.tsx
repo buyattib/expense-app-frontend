@@ -8,7 +8,7 @@ const textVariants = cva('', {
 		size: {
 			xs: 'text-xs',
 			sm: 'text-sm',
-			md: 'text-md',
+			md: 'text-base',
 			lg: 'text-lg',
 		},
 		alignment: {
@@ -19,13 +19,14 @@ const textVariants = cva('', {
 		weight: {
 			light: 'font-light',
 			medium: 'font-medium',
+			semi: 'font-semibold',
 			bold: 'font-bold',
 		},
 	},
 	defaultVariants: {
 		size: 'md',
 		alignment: 'left',
-		weight: 'bold',
+		weight: 'medium',
 	},
 })
 
@@ -34,9 +35,13 @@ export interface TextProps
 		VariantProps<typeof textVariants> {}
 
 export const Text = React.forwardRef<HTMLParagraphElement, TextProps>(
-	({ className, size, alignment, ...props }, ref) => {
+	({ className, size, alignment, weight, ...props }, ref) => {
 		return (
-			<p ref={ref} className={cn(textVariants({ size, alignment, className }))} {...props} />
+			<p
+				ref={ref}
+				className={cn(textVariants({ size, alignment, weight, className }))}
+				{...props}
+			/>
 		)
 	},
 )

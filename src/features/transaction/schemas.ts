@@ -43,6 +43,6 @@ export const transactionCreateSchema = z.object({
 	description: z.string().optional(),
 	transactionType: TransactionTypeEnum,
 
-	transactionCategoryId: z.string().min(1, { message: 'Transaction category is required' }),
+	transactionCategoryId: z.string().min(1, { message: 'Category is required' }),
 	accountId: z.string().min(1, { message: 'Account is required' }),
 })

@@ -12,31 +12,27 @@ import {
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 
-import { CreateAccountForm, type CreateAccountFormProps } from './create-account-form'
+import { CreateTransactionForm, type CreateTransactionFormProps } from './create-transaction-form'
 
 type CreateAccountModalProps = {
 	children: React.ReactNode
-	onSuccess: CreateAccountFormProps['onSuccess']
+	onSuccess: CreateTransactionFormProps['onSuccess']
 }
 
-export function CreateAccountModal({ children, onSuccess }: CreateAccountModalProps) {
+export function CreateTransactionModal({ children, onSuccess }: CreateAccountModalProps) {
 	const [open, setOpen] = useState(false)
+
 	return (
-		<Dialog
-			open={open}
-			onOpenChange={value => {
-				setOpen(value)
-			}}
-		>
+		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>{children}</DialogTrigger>
 			<DialogContent size='lg'>
 				<DialogHeader>
-					<DialogTitle>Create a new account</DialogTitle>
+					<DialogTitle>Add a transaction</DialogTitle>
 					<DialogDescription>
-						An account is used to track your transactions
+						A transaction is used to track expenses and incomes
 					</DialogDescription>
 				</DialogHeader>
-				<CreateAccountForm
+				<CreateTransactionForm
 					onSuccess={() =>
 						onSuccess().then(() => {
 							setOpen(false)

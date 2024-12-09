@@ -1,3 +1,4 @@
+import React from 'react'
 import { Control, FieldPath, FieldValues } from 'react-hook-form'
 import { Input } from '@/components/ui/input'
 import {
@@ -17,7 +18,7 @@ type Props<TFieldValues extends FieldValues = FieldValues> = {
 	placeholder?: string
 	description?: string
 	hasMessage?: boolean
-	type?: string
+	type?: React.ComponentProps<'input'>['type']
 	disabled?: boolean
 }
 
