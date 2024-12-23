@@ -11,4 +11,9 @@ export {
 export { getCurrencies, getAccountTypes, getAccounts, createAccount } from './services'
 export { currencyAdapter, accountTypeAdapter, accountAdapter } from './adapters'
 
-export { accountCreateSchema } from './schemas'
+export {
+	accountApiSchema,
+	accountTypeApiSchema,
+	accountExtendedApiSchema,
+	accountCreateSchema,
+} from './schemas'

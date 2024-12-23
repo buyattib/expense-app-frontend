@@ -66,6 +66,7 @@ export async function requestWrapper<T>(asyncFunction: () => Promise<T>) {
 		return await asyncFunction()
 	} catch (error) {
 		if (error instanceof z.ZodError) {
+			console.log(error)
 			throw new Error('Error validating data')
 		}
 		throw error

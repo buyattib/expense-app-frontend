@@ -4,10 +4,15 @@ import {
 	type TransactionCategoryApi,
 	type TransactionApi,
 	type TransactionCategoryCreate,
-	TransactionCreate,
+	type TransactionCreate,
+	type TransactionExtended,
 } from './types'
-import { transactionCategoryAdapter, transactionAdapter } from './adapters'
-import { transactionCategoryApiSchema, transactionApiSchema } from './schemas'
+import {
+	transactionCategoryAdapter,
+	transactionAdapter,
+	transactionExtendedAdapter,
+} from './adapters'
+import { transactionCategoryApiSchema, transactionExtendedApiSchema } from './schemas'
 
 // transaction cateogry
 
@@ -36,8 +41,12 @@ export async function createTransactionCategory({ name, description }: Transacti
 export const getTransactions = () =>
 	requestWrapper(async () => {
 		return api
-			.get<TransactionApi[]>('/transactions')
-			.then(result => result.data.map(t => transactionAdapter(transactionApiSchema.parse(t))))
+			.get<TransactionExtended[]>('/transactions')
+			.then(result =>
+				result.data.map(t =>
+					transactionExtendedAdapter(transactionExtendedApiSchema.parse(t)),
+				),
+			)
 	})
 
 export async function createTransaction({

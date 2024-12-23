@@ -1,4 +1,7 @@
 import { z } from 'zod'
+
+import { accountApiSchema } from '@/features/account'
+
 import { TransactionTypeEnum } from './constants'
 
 // Api schemas
@@ -12,7 +15,7 @@ export const transactionCategoryApiSchema = z.object({
 
 export const transactionApiSchema = z.object({
 	id: z.string(),
-	date: z.string().date(),
+	date: z.string().datetime({ local: true }),
 	amount: z.number().int(),
 	description: z.string().optional().nullable(),
 	transaction_type: z.string(),
@@ -20,6 +23,11 @@ export const transactionApiSchema = z.object({
 	user_id: z.string(),
 	transaction_category_id: z.string(),
 	account_id: z.string(),
+})
+
+export const transactionExtendedApiSchema = transactionApiSchema.extend({
+	transaction_category: transactionCategoryApiSchema,
+	account: accountApiSchema,
 })
 
 // Form Schemas

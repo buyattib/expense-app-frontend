@@ -1,4 +1,12 @@
-import { TransactionCategoryApi, TransactionCategory, TransactionApi, Transaction } from './types'
+import { accountAdapter } from '@/features/account'
+import {
+	TransactionCategoryApi,
+	TransactionCategory,
+	TransactionApi,
+	Transaction,
+	TransactionExtendedApi,
+	TransactionExtended,
+} from './types'
 
 export function transactionCategoryAdapter(tc: TransactionCategoryApi): TransactionCategory {
 	return {
@@ -20,5 +28,13 @@ export function transactionAdapter(t: TransactionApi): Transaction {
 		userId: t.user_id,
 		transactionCategoryId: t.transaction_category_id,
 		accountId: t.account_id,
+	}
+}
+
+export function transactionExtendedAdapter(a: TransactionExtendedApi): TransactionExtended {
+	return {
+		...transactionAdapter(a),
+		transactionCategory: transactionCategoryAdapter(a.transaction_category),
+		account: accountAdapter(a.account),
 	}
 }

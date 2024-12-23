@@ -12,19 +12,25 @@ import {
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 
-import { CreateTransactionForm, type CreateTransactionFormProps } from './create-transaction-form'
+import {
+	CreateTransactionCategoryForm,
+	type CreateTransactionCategoryFormProps,
+} from './create-transaction-category-form'
 
-type CreateTransactionModalProps = {
+type CreateTransactionCategoryModalProps = {
 	children: React.ReactNode
-	onSuccess: CreateTransactionFormProps['onSuccess']
+	onSuccess?: CreateTransactionCategoryFormProps['onSuccess']
 }
 
-export function CreateTransactionModal({ children, onSuccess }: CreateTransactionModalProps) {
+export function CreateTransactionCategoryModal({
+	children,
+	onSuccess,
+}: CreateTransactionCategoryModalProps) {
 	const [open, setOpen] = useState(false)
 
 	const _onSuccess = async () => {
 		setOpen(false)
-		await onSuccess()
+		await onSuccess?.()
 	}
 
 	return (
@@ -32,12 +38,12 @@ export function CreateTransactionModal({ children, onSuccess }: CreateTransactio
 			<DialogTrigger asChild>{children}</DialogTrigger>
 			<DialogContent size='lg'>
 				<DialogHeader>
-					<DialogTitle>Add a transaction</DialogTitle>
+					<DialogTitle>Create a category</DialogTitle>
 					<DialogDescription>
-						A transaction is used to track expenses and incomes
+						A category is used to categorize incomes and expenses
 					</DialogDescription>
 				</DialogHeader>
-				<CreateTransactionForm onSuccess={_onSuccess} />
+				<CreateTransactionCategoryForm onSuccess={_onSuccess} />
 				<DialogFooter>
 					<DialogClose asChild>
 						<Button variant='outline' full>

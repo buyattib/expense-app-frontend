@@ -66,7 +66,7 @@ export function CreateTransactionForm({ onSuccess }: CreateTransactionFormProps)
 		setIsSubmiting(true)
 		try {
 			await createTransaction(values)
-			toast.success('Success', { description: 'Category created' })
+			toast.success('Success', { description: 'Transaction created' })
 			await onSuccess()
 		} catch (error) {
 			console.log(error)
@@ -83,6 +83,10 @@ export function CreateTransactionForm({ onSuccess }: CreateTransactionFormProps)
 			>
 				<div className='grid md:grid-cols-2 grid-cols-1 gap-x-4'>
 					<CustomFormInput
+						inputProps={{
+							type: 'date',
+							className: 'w-full',
+						}}
 						control={form.control}
 						name='date'
 						label='Date'
@@ -90,7 +94,7 @@ export function CreateTransactionForm({ onSuccess }: CreateTransactionFormProps)
 						disabled={isSubmiting}
 					/>
 					<CustomFormInput
-						type='number'
+						inputProps={{ type: 'number' }}
 						control={form.control}
 						name='amount'
 						label='Amount'

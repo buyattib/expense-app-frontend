@@ -22,7 +22,7 @@ type Props<TFieldValues extends FieldValues = FieldValues> = {
 	control: Control<TFieldValues>
 	name: FieldPath<TFieldValues>
 	options: Option[]
-	label?: string
+	label?: React.ReactNode
 	placeholder?: string
 	description?: string
 	hasMessage?: boolean

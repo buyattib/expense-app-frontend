@@ -10,6 +10,10 @@ import { NotFound } from '@/pages/not-found'
 // Protected Pages
 const Dashboard = lazy(async () => ({ default: (await import('@/pages/dashboard')).Dashboard })) // or export default
 const Settings = lazy(async () => ({ default: (await import('@/pages/settings')).Settings }))
+const Accounts = lazy(async () => ({ default: (await import('@/pages/accounts')).Accounts }))
+const Transactions = lazy(async () => ({
+	default: (await import('@/pages/transactions')).Transactions,
+}))
 
 export function Router() {
 	return (
@@ -26,6 +30,8 @@ export function Router() {
 			<Suspense>
 				<Route path={PRIVATE_ROUTES.INDEX} component={Dashboard} />
 				<Route path={PRIVATE_ROUTES.DASHBOARD} component={Dashboard} />
+				<Route path={PRIVATE_ROUTES.ACCOUNTS} component={Accounts} />
+				<Route path={PRIVATE_ROUTES.TRANSACTIONS} component={Transactions} />
 				<Route path={PRIVATE_ROUTES.SETTINGS} component={Settings} />
 			</Suspense>
 

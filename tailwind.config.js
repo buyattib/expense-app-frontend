@@ -3,10 +3,20 @@ export default {
 	darkMode: ['class'],
 	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
 	theme: {
-		// when declaring color, borderRadius, etc outside extend we are overriding the whole object
-		extend: {},
-
-		// tailwind's defaults
+		extend: {
+			// colors: {
+			// 	sidebar: {
+			// 		DEFAULT: 'hsl(var(--sidebar-background))',
+			// 		foreground: 'hsl(var(--sidebar-foreground))',
+			// 		primary: 'hsl(var(--sidebar-primary))',
+			// 		'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+			// 		accent: 'hsl(var(--sidebar-accent))',
+			// 		'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+			// 		border: 'hsl(var(--sidebar-border))',
+			// 		ring: 'hsl(var(--sidebar-ring))',
+			// 	},
+			// },
+		},
 		screens: {
 			sm: '640px',
 			md: '768px',
@@ -77,8 +87,18 @@ export default {
 				4: 'hsl(var(--chart-4))',
 				5: 'hsl(var(--chart-5))',
 			},
+			sidebar: {
+				DEFAULT: 'hsl(var(--sidebar-background))',
+				foreground: 'hsl(var(--sidebar-foreground))',
+				primary: 'hsl(var(--sidebar-primary))',
+				'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
+				accent: 'hsl(var(--sidebar-accent))',
+				'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
+				border: 'hsl(var(--sidebar-border))',
+				ring: 'hsl(var(--sidebar-ring))',
+			},
 			black: colors.black,
-			link: colors.sky['500'],
+			link: colors.sky[500],
 		}),
 		animation: {
 			'spin-slow': 'spin 2s linear infinite',

@@ -7,5 +7,7 @@ export const PUBLIC_ROUTES = {
 export const PRIVATE_ROUTES = {
 	INDEX: '/',
 	DASHBOARD: '/dashboard',
+	ACCOUNTS: '/accounts',
+	TRANSACTIONS: '/transactions',
 	SETTINGS: '/settings',
 } as const

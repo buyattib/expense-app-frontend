@@ -14,11 +14,11 @@ import {
 type Props<TFieldValues extends FieldValues = FieldValues> = {
 	control: Control<TFieldValues>
 	name: FieldPath<TFieldValues>
-	label?: string
+	label?: React.ReactNode
 	placeholder?: string
 	description?: string
 	hasMessage?: boolean
-	type?: React.ComponentProps<'input'>['type']
+	inputProps?: React.ComponentProps<'input'>
 	disabled?: boolean
 }
 
@@ -28,8 +28,8 @@ export function CustomFormInput<TFieldValues extends FieldValues = FieldValues>(
 	label,
 	placeholder,
 	description,
+	inputProps,
 	disabled = false,
-	type = 'text',
 	hasMessage = true,
 	...rest
 }: Props<TFieldValues>) {
@@ -47,11 +47,11 @@ export function CustomFormInput<TFieldValues extends FieldValues = FieldValues>(
 						{label && <FormLabel>{label}</FormLabel>}
 						<FormControl>
 							<Input
-								type={type}
 								placeholder={placeholder}
-								{...field}
 								disabled={disabled}
 								className={`${isError ? 'border-2 border-destructive' : ''}`}
+								{...inputProps}
+								{...field}
 							/>
 						</FormControl>
 						{description && <FormDescription>{description}</FormDescription>}
