@@ -19,26 +19,33 @@ export const accountApiSchema = z.object({
 	id: z.string(),
 	name: z.string(),
 	description: z.string().optional().nullable(),
-	balance: z.number().int(),
 
 	user_id: z.string(),
-	currency_id: z.string(),
 	account_type_id: z.string(),
 })
 
-export const accountExtendedApiSchema = accountApiSchema.extend({
+export const subAccountApiSchema = z.object({
+	id: z.string(),
+	balance: z.number().int(),
+
+	account_id: z.string(),
+	currency_id: z.string(),
+})
+
+// Extended
+
+export const subAccountExtendedApiSchema = subAccountApiSchema.extend({
 	currency: currencyApiSchema,
+})
+
+export const accountExtendedApiSchema = accountApiSchema.extend({
 	account_type: accountTypeApiSchema,
+	sub_accounts: subAccountApiSchema.array(),
 })
 
 // Form Schemas
 
-export const accountCreateSchema = z.object({
-	name: z
-		.string()
-		.min(1, { message: 'Name is required' })
-		.max(50, { message: 'Must be 50 or fewer characters long' }),
-	description: z.string().optional(),
+export const subAccountCreateSchema = z.object({
 	balance: z.coerce
 		.number({ required_error: 'Balance is required' })
 		.nonnegative({
@@ -46,5 +53,16 @@ export const accountCreateSchema = z.object({
 		})
 		.transform(val => window.Math.round(val * 100)),
 	currencyId: z.string().min(1, { message: 'Currency is required' }),
+})
+
+export const accountCreateSchema = z.object({
+	name: z
+		.string()
+		.min(1, { message: 'Name is required' })
+		.max(50, { message: 'Must be 50 or fewer characters long' }),
+	description: z.string().optional(),
 	accountTypeId: z.string().min(1, { message: 'Account type is required' }),
+	subAccounts: subAccountCreateSchema
+		.array()
+		.min(1, { message: 'At least one supported currency is required' }),
 })

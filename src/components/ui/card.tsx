@@ -24,6 +24,7 @@ CardHeader.displayName = 'CardHeader'
 const cardTitleVariants = cva('font-semibold leading-none tracking-tight', {
 	variants: {
 		size: {
+			xs: 'text-md',
 			sm: 'text-lg',
 			md: 'text-xl',
 			lg: 'text-2xl',

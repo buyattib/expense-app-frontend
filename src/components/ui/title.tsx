@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
 
-const titleVariants = cva('', {
+const titleVariants = cva('text-black', {
 	variants: {
 		size: {
 			sm: 'text-lg tracking-tight',
@@ -36,12 +36,12 @@ export interface TitleProps
 }
 
 export const Title = React.forwardRef<HTMLHeadingElement, TitleProps>(
-	({ className, size, alignment, level, ...props }, ref) => {
+	({ className, size, alignment, weight, level, ...props }, ref) => {
 		const Comp = level
 		return (
 			<Comp
 				ref={ref}
-				className={cn(titleVariants({ size, alignment, className }))}
+				className={cn(titleVariants({ size, alignment, weight, className }))}
 				{...props}
 			/>
 		)

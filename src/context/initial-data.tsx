@@ -1,18 +1,21 @@
 import { useQuery } from '@tanstack/react-query'
 import { toast } from 'sonner'
 
-import { usePrivateRoute } from '@/router'
-import { useGlobalStore } from '@/store'
+import { useGlobalStore, useUserStore, useAuthStore } from '@/store'
 
 import { getCurrencies, getAccountTypes } from '@/features/account'
 
 export function InitialData({ children }: { children: React.ReactNode }) {
-	const isPrivateRoute = usePrivateRoute()
+	const store = useAuthStore()
+	const user = useUserStore(store => store.user)
+
 	const setData = useGlobalStore(state => state.setAll)
+
+	const isLoggedIn = !!store.accessToken && !!store.refreshToken && !!user?.id && !!user?.email
 
 	useQuery({
 		queryKey: ['initial-data'],
-		enabled: isPrivateRoute,
+		enabled: isLoggedIn,
 		queryFn: () =>
 			Promise.all([getCurrencies(), getAccountTypes()])
 				.then(([currencies, accountTypes]) => {

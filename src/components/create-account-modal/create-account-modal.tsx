@@ -1,8 +1,7 @@
-import { useState } from 'react'
+import { DialogProps } from '@radix-ui/react-dialog'
 
 import {
 	Dialog,
-	DialogTrigger,
 	DialogContent,
 	DialogDescription,
 	DialogHeader,
@@ -15,20 +14,14 @@ import { Button } from '@/components/ui/button'
 import { CreateAccountForm, type CreateAccountFormProps } from './create-account-form'
 
 type CreateAccountModalProps = {
-	children: React.ReactNode
 	onSuccess: CreateAccountFormProps['onSuccess']
+	open: boolean
+	onOpenChange: DialogProps['onOpenChange']
 }
 
-export function CreateAccountModal({ children, onSuccess }: CreateAccountModalProps) {
-	const [open, setOpen] = useState(false)
+export function CreateAccountModal({ open, onOpenChange, onSuccess }: CreateAccountModalProps) {
 	return (
-		<Dialog
-			open={open}
-			onOpenChange={value => {
-				setOpen(value)
-			}}
-		>
-			<DialogTrigger asChild>{children}</DialogTrigger>
+		<Dialog open={open} onOpenChange={onOpenChange}>
 			<DialogContent size='lg'>
 				<DialogHeader>
 					<DialogTitle>Create a new account</DialogTitle>
@@ -36,13 +29,7 @@ export function CreateAccountModal({ children, onSuccess }: CreateAccountModalPr
 						An account is used to track your transactions
 					</DialogDescription>
 				</DialogHeader>
-				<CreateAccountForm
-					onSuccess={() =>
-						onSuccess().then(() => {
-							setOpen(false)
-						})
-					}
-				/>
+				<CreateAccountForm onSuccess={onSuccess} />
 				<DialogFooter>
 					<DialogClose asChild>
 						<Button variant='outline' full>

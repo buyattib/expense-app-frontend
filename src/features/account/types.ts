@@ -5,6 +5,8 @@ import {
 	accountApiSchema,
 	accountCreateSchema,
 	accountExtendedApiSchema,
+	subAccountApiSchema,
+	subAccountExtendedApiSchema,
 } from './schemas'
 
 // Api types
@@ -12,6 +14,9 @@ import {
 export type CurrencyApi = z.infer<typeof currencyApiSchema>
 export type AccountTypeApi = z.infer<typeof accountTypeApiSchema>
 export type AccountApi = z.infer<typeof accountApiSchema>
+export type SubAccountApi = z.infer<typeof subAccountApiSchema>
+
+export type SubAccountExtendedApi = z.infer<typeof subAccountExtendedApiSchema>
 export type AccountExtendedApi = z.infer<typeof accountExtendedApiSchema>
 
 // Api adapted types
@@ -33,15 +38,26 @@ export type Account = {
 	id: AccountApi['id']
 	name: AccountApi['name']
 	description?: AccountApi['description']
-	balance: AccountApi['balance']
 	userId: AccountApi['user_id']
-	currencyId: AccountApi['currency_id']
 	accountTypeId: AccountApi['account_type_id']
 }
 
-export type AccountExtended = Account & {
+export type SubAccount = {
+	id: SubAccountApi['id']
+	balance: SubAccountApi['balance']
+	accountId: SubAccountApi['account_id']
+	currencyId: SubAccountApi['currency_id']
+}
+
+// Extended
+
+export type SubAccountExtended = SubAccount & {
 	currency: Currency
+}
+
+export type AccountExtended = Account & {
 	accountType: AccountType
+	subAccounts: SubAccount[]
 }
 
 // Form types

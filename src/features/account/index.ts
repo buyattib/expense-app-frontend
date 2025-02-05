@@ -3,17 +3,22 @@ export {
 	type Currency,
 	type AccountTypeApi,
 	type AccountType,
+	type SubAccountApi,
+	type SubAccount,
 	type AccountApi,
 	type Account,
 	type AccountCreate,
 } from './types'
 
 export { getCurrencies, getAccountTypes, getAccounts, createAccount } from './services'
-export { currencyAdapter, accountTypeAdapter, accountAdapter } from './adapters'
+export { currencyAdapter, accountTypeAdapter, subAccountAdapter, accountAdapter } from './adapters'
 
 export {
+	subAccountApiSchema,
+	subAccountExtendedApiSchema,
+	subAccountCreateSchema,
 	accountApiSchema,
-	accountTypeApiSchema,
 	accountExtendedApiSchema,
 	accountCreateSchema,
+	accountTypeApiSchema,
 } from './schemas'

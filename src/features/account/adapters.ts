@@ -7,6 +7,10 @@ import {
 	CurrencyApi,
 	AccountExtendedApi,
 	AccountExtended,
+	SubAccountApi,
+	SubAccount,
+	SubAccountExtendedApi,
+	SubAccountExtended,
 } from './types'
 
 export function currencyAdapter(c: CurrencyApi): Currency {
@@ -21,22 +25,36 @@ export function accountTypeAdapter(at: AccountTypeApi): AccountType {
 	}
 }
 
+export function subAccountAdapter(a: SubAccountApi): SubAccount {
+	return {
+		id: a.id,
+		balance: a.balance,
+		accountId: a.account_id,
+		currencyId: a.currency_id,
+	}
+}
+
 export function accountAdapter(a: AccountApi): Account {
 	return {
 		id: a.id,
 		name: a.name,
 		description: a.description,
-		balance: a.balance,
 		userId: a.user_id,
-		currencyId: a.currency_id,
 		accountTypeId: a.account_type_id,
+	}
+}
+
+export function subAccountExtendedAdapter(a: SubAccountExtendedApi): SubAccountExtended {
+	return {
+		...subAccountAdapter(a),
+		currency: currencyAdapter(a.currency),
 	}
 }
 
 export function accountExtendedAdapter(a: AccountExtendedApi): AccountExtended {
 	return {
 		...accountAdapter(a),
-		currency: currencyAdapter(a.currency),
 		accountType: accountTypeAdapter(a.account_type),
+		subAccounts: a.sub_accounts.map(subAccountAdapter),
 	}
 }

@@ -49,17 +49,18 @@ export const getAccounts = () =>
 export async function createAccount({
 	name,
 	description,
-	balance,
-	currencyId,
 	accountTypeId,
+	subAccounts,
 }: AccountCreate) {
 	return api
 		.post<AccountApi>('/accounts', {
 			name,
 			description,
-			balance,
-			currency_id: currencyId,
 			account_type_id: accountTypeId,
+			sub_accounts: subAccounts.map(sa => ({
+				currency_id: sa.currencyId,
+				balance: sa.balance,
+			})),
 		})
 		.then(r => accountAdapter(r.data))
 }

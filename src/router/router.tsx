@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { Switch, Route } from 'wouter'
+import { LoaderCircleIcon } from 'lucide-react'
 
 import { PUBLIC_ROUTES, PRIVATE_ROUTES } from './routes'
 
@@ -27,7 +28,13 @@ export function Router() {
 				}}
 			/>
 
-			<Suspense>
+			<Suspense
+				fallback={
+					<div className='flex justify-center items-center h-full'>
+						<LoaderCircleIcon className='w-10 h-10 animate-spin' />
+					</div>
+				}
+			>
 				<Route path={PRIVATE_ROUTES.INDEX} component={Dashboard} />
 				<Route path={PRIVATE_ROUTES.DASHBOARD} component={Dashboard} />
 				<Route path={PRIVATE_ROUTES.ACCOUNTS} component={Accounts} />

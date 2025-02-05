@@ -68,7 +68,6 @@ export function Login() {
 							control={form.control}
 							name='email'
 							placeholder='example@email.com'
-							error={!!form.formState.errors.email}
 						/>
 					</CardContent>
 
