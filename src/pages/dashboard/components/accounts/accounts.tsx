@@ -1,7 +1,7 @@
 import { AlertCircleIcon, Plus as PlusIcon } from 'lucide-react'
 import { useQuery } from '@tanstack/react-query'
 
-import { currencyFormatter } from '@/lib/utils'
+import { currencyFormatter } from '@/lib/formatters'
 import { getAccounts } from '@/features/account'
 
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'

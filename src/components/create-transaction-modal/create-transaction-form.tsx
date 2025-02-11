@@ -4,8 +4,7 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useQuery } from '@tanstack/react-query'
 
-import { handleError } from '@/services'
-import { title } from '@/lib/utils'
+import { title } from '@/lib/string-formatters'
 
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
@@ -20,7 +19,7 @@ import {
 	getTransactionCategories,
 	TRANSACTION_TYPE,
 } from '@/features/transaction'
-import { getAccounts } from '@/features/account'
+import { useAccounts } from '@/features/account/hooks'
 
 const transactionCreateInitialValues = {
 	date: '',
@@ -42,10 +41,7 @@ export function CreateTransactionForm({ onSuccess }: CreateTransactionFormProps)
 		isPending: isAccountsPending,
 		isError: isAccountsError,
 		data: accounts,
-	} = useQuery({
-		queryKey: ['accounts'],
-		queryFn: () => getAccounts(),
-	})
+	} = useAccounts({ page: 1, perPage: 10 }) // TODO: make it so its possible to fetch all accounts
 
 	const {
 		isPending: isTransactionCategoriesPending,
@@ -70,7 +66,7 @@ export function CreateTransactionForm({ onSuccess }: CreateTransactionFormProps)
 			await onSuccess()
 		} catch (error) {
 			console.log(error)
-			toast.error('Error', { description: handleError(error) })
+			toast.error('Error', { description: 'There was an error creating the transaction' })
 			setIsSubmiting(false)
 		}
 	}

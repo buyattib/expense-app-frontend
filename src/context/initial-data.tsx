@@ -5,7 +5,7 @@ import { useGlobalStore, useUserStore, useAuthStore } from '@/store'
 
 import { getCurrencies, getAccountTypes } from '@/features/account'
 
-export function InitialData({ children }: { children: React.ReactNode }) {
+export function InitialData() {
 	const store = useAuthStore()
 	const user = useUserStore(store => store.user)
 
@@ -31,5 +31,5 @@ export function InitialData({ children }: { children: React.ReactNode }) {
 				}),
 	})
 
-	return children
+	return <></>
 }

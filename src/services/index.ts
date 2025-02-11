@@ -1,1 +1,1 @@
-export { api, requestWrapper, handleError } from './api'
+export { api } from './api'

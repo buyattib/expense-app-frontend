@@ -6,7 +6,8 @@ import { useAuthStore, useUserStore } from '@/store'
 import { refresh } from '@/features/auth'
 
 export function AuthWrapper({ children }: { children: React.ReactNode }) {
-	const refreshToken = useAuthStore(state => state.refreshToken) // on app mount, it will get the token from local storage
+	// on app mount, it will get the token from local storage
+	const refreshToken = useAuthStore(state => state.refreshToken)
 
 	const updateAuthStore = useAuthStore(state => state.update)
 	const removeAuthStore = useAuthStore(state => state.remove)
@@ -14,7 +15,8 @@ export function AuthWrapper({ children }: { children: React.ReactNode }) {
 	const updateUserStore = useUserStore(state => state.update)
 	const removeUserStore = useUserStore(state => state.remove)
 
-	const isFirstRender = useRef(true) // to avoid re-fetching when refreshToken is updated
+	// to avoid re-fetching when refreshToken is updated
+	const isFirstRender = useRef(true)
 	const enabled = !!refreshToken && isFirstRender.current
 
 	// TODO: instead of refreshing the token could check if the current access token is still valid making a request to user/me

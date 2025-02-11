@@ -55,6 +55,6 @@ export function accountExtendedAdapter(a: AccountExtendedApi): AccountExtended {
 	return {
 		...accountAdapter(a),
 		accountType: accountTypeAdapter(a.account_type),
-		subAccounts: a.sub_accounts.map(subAccountAdapter),
+		subAccounts: a.sub_accounts.map(subAccountExtendedAdapter),
 	}
 }

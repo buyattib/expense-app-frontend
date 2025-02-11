@@ -49,15 +49,13 @@ export type SubAccount = {
 	currencyId: SubAccountApi['currency_id']
 }
 
-// Extended
-
 export type SubAccountExtended = SubAccount & {
 	currency: Currency
 }
 
 export type AccountExtended = Account & {
 	accountType: AccountType
-	subAccounts: SubAccount[]
+	subAccounts: SubAccountExtended[]
 }
 
 // Form types

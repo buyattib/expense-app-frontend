@@ -40,7 +40,7 @@ export const subAccountExtendedApiSchema = subAccountApiSchema.extend({
 
 export const accountExtendedApiSchema = accountApiSchema.extend({
 	account_type: accountTypeApiSchema,
-	sub_accounts: subAccountApiSchema.array(),
+	sub_accounts: subAccountExtendedApiSchema.array(),
 })
 
 // Form Schemas

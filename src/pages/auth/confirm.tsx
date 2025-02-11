@@ -4,7 +4,6 @@ import { toast } from 'sonner'
 
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from '@/router/routes'
 import { useAuthStore, useUserStore } from '@/store'
-import { handleError } from '@/services'
 
 import { AUTH_TYPE, auth, type AuthType } from '@/features/auth'
 
@@ -32,8 +31,8 @@ export function Confirm({ authType }: Props) {
 					return data
 				})
 				.catch(error => {
-					const msg = handleError(error)
-					toast.error(msg)
+					console.log(error)
+					toast.error('There was an error loging in')
 				}),
 		enabled,
 	})

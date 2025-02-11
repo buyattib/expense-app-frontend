@@ -5,7 +5,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { InfoIcon, PlusIcon, XIcon } from 'lucide-react'
 
 import { useGlobalStore } from '@/store'
-import { handleError } from '@/services'
 
 import { Form } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
@@ -55,7 +54,7 @@ export function CreateAccountForm({ onSuccess }: CreateAccountFormProps) {
 			await onSuccess()
 		} catch (error) {
 			console.log(error)
-			toast.error('Error', { description: handleError(error) })
+			toast.error('Error', { description: 'There was an error creating the account' })
 			setIsSubmiting(false)
 		}
 	}

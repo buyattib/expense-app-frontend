@@ -1,1 +1,1 @@
-export { AccountsContainer as Accounts } from './accounts-container'
+export { Accounts } from './accounts'

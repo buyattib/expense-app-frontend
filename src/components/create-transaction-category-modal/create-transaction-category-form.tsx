@@ -3,8 +3,6 @@ import { toast } from 'sonner'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 
-import { handleError } from '@/services'
-
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
 
@@ -42,7 +40,9 @@ export function CreateTransactionCategoryForm({ onSuccess }: CreateTransactionCa
 			await onSuccess()
 		} catch (error) {
 			console.log(error)
-			toast.error('Error', { description: handleError(error) })
+			toast.error('Error', {
+				description: 'There was an error creating the transaction category',
+			})
 			setIsSubmiting(false)
 		}
 	}

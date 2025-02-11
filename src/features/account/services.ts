@@ -1,4 +1,7 @@
-import { api, requestWrapper } from '@/services'
+import { api } from '@/services'
+
+import { Pagination, PaginationResponse } from '@/models/pagination'
+import { paginationApiAdapter } from '@/adapters/pagination'
 
 import {
 	type CurrencyApi,
@@ -18,33 +21,30 @@ import { accountTypeApiSchema, currencyApiSchema, accountExtendedApiSchema } fro
 // currency
 
 export const getCurrencies = () =>
-	requestWrapper(async () => {
-		return api
-			.get<CurrencyApi[]>('/currencies')
-			.then(result => result.data.map(c => currencyAdapter(currencyApiSchema.parse(c))))
-	})
+	api
+		.get<CurrencyApi[]>('/currencies')
+		.then(result => result.data.map(c => currencyAdapter(currencyApiSchema.parse(c))))
 
 // account type
 
 export const getAccountTypes = () =>
-	requestWrapper(async () => {
-		return api
-			.get<AccountTypeApi[]>('/account-types')
-			.then(result =>
-				result.data.map(at => accountTypeAdapter(accountTypeApiSchema.parse(at))),
-			)
-	})
+	api
+		.get<AccountTypeApi[]>('/account-types')
+		.then(result => result.data.map(at => accountTypeAdapter(accountTypeApiSchema.parse(at))))
 
 // account
 
-export const getAccounts = () =>
-	requestWrapper(async () => {
-		return api
-			.get<AccountExtendedApi[]>('/accounts')
-			.then(result =>
-				result.data.map(a => accountExtendedAdapter(accountExtendedApiSchema.parse(a))),
-			)
-	})
+export const getAccounts = ({ page, perPage }: Pagination) =>
+	api
+		.get<
+			PaginationResponse<AccountExtendedApi>
+		>('/accounts', { params: { ...paginationApiAdapter({ page, perPage }) } })
+		.then(result => ({
+			total: result.data.total,
+			items: result.data.items.map(a =>
+				accountExtendedAdapter(accountExtendedApiSchema.parse(a)),
+			),
+		}))
 
 export async function createAccount({
 	name,

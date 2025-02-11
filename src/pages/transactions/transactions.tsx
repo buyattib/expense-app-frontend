@@ -1,7 +1,8 @@
 import { Plus as PlusIcon, AlertCircleIcon } from 'lucide-react'
 import { useQuery } from '@tanstack/react-query'
 
-import { currencyFormatter, title } from '@/lib/utils'
+import { currencyFormatter } from '@/lib/formatters'
+import { title } from '@/lib/utils'
 import { getTransactions } from '@/features/transaction'
 
 import { Title } from '@/components/ui/title'

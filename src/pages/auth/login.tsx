@@ -5,7 +5,6 @@ import { toast } from 'sonner'
 import { useLocation } from 'wouter'
 
 import { PUBLIC_ROUTES } from '@/router/routes'
-import { handleError } from '@/services'
 
 import { Button } from '@/components/ui/button'
 import { Form } from '@/components/ui/form'
@@ -41,10 +40,10 @@ export function Login() {
 			const response = await emailLink({ email: values.email })
 			toast.success(response.message)
 			navigate(PUBLIC_ROUTES.EMAIL_SENT)
-		} catch (err) {
-			const message = handleError(err)
+		} catch (error) {
+			console.log(error)
 			toast.error('Error', {
-				description: message,
+				description: 'There was an error loging in',
 			})
 		} finally {
 			setIsSubmiting(false)

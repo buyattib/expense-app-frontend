@@ -3,20 +3,7 @@ export default {
 	darkMode: ['class'],
 	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
 	theme: {
-		extend: {
-			// colors: {
-			// 	sidebar: {
-			// 		DEFAULT: 'hsl(var(--sidebar-background))',
-			// 		foreground: 'hsl(var(--sidebar-foreground))',
-			// 		primary: 'hsl(var(--sidebar-primary))',
-			// 		'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-			// 		accent: 'hsl(var(--sidebar-accent))',
-			// 		'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-			// 		border: 'hsl(var(--sidebar-border))',
-			// 		ring: 'hsl(var(--sidebar-ring))',
-			// 	},
-			// },
-		},
+		extend: {},
 		screens: {
 			sm: '640px',
 			md: '768px',
@@ -101,6 +88,7 @@ export default {
 			link: colors.sky[500],
 		}),
 		animation: {
+			spin: 'spin 1s linear infinite',
 			'spin-slow': 'spin 2s linear infinite',
 		},
 	},

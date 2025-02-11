@@ -13,12 +13,11 @@ function App() {
 				<ThemeProvider defaultTheme='light' storageKey='ui-theme'>
 					<AuthWrapper>
 						<RoutesGuard>
-							<InitialData>
-								<Layout>
-									<Router />
-									<Toaster richColors={true} />
-								</Layout>
-							</InitialData>
+							<InitialData />
+							<Layout>
+								<Router />
+								<Toaster richColors={true} />
+							</Layout>
 						</RoutesGuard>
 					</AuthWrapper>
 				</ThemeProvider>

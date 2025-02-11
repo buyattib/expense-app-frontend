@@ -1,4 +1,4 @@
-import { api, requestWrapper } from '@/services'
+import { api } from '@/services'
 
 import {
 	type TransactionCategoryApi,
@@ -17,15 +17,13 @@ import { transactionCategoryApiSchema, transactionExtendedApiSchema } from './sc
 // transaction cateogry
 
 export const getTransactionCategories = () =>
-	requestWrapper(async () => {
-		return api
-			.get<TransactionCategoryApi[]>('/transaction-categories')
-			.then(result =>
-				result.data.map(tc =>
-					transactionCategoryAdapter(transactionCategoryApiSchema.parse(tc)),
-				),
-			)
-	})
+	api
+		.get<TransactionCategoryApi[]>('/transaction-categories')
+		.then(result =>
+			result.data.map(tc =>
+				transactionCategoryAdapter(transactionCategoryApiSchema.parse(tc)),
+			),
+		)
 
 export async function createTransactionCategory({ name, description }: TransactionCategoryCreate) {
 	return api
@@ -39,15 +37,11 @@ export async function createTransactionCategory({ name, description }: Transacti
 // transaction
 
 export const getTransactions = () =>
-	requestWrapper(async () => {
-		return api
-			.get<TransactionExtended[]>('/transactions')
-			.then(result =>
-				result.data.map(t =>
-					transactionExtendedAdapter(transactionExtendedApiSchema.parse(t)),
-				),
-			)
-	})
+	api
+		.get<TransactionExtended[]>('/transactions')
+		.then(result =>
+			result.data.map(t => transactionExtendedAdapter(transactionExtendedApiSchema.parse(t))),
+		)
 
 export async function createTransaction({
 	date,
