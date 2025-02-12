@@ -1,4 +1,4 @@
-import { api } from '@/services'
+import { api } from '@/services/api'
 
 import { Pagination, PaginationResponse } from '@/models/pagination'
 import { paginationApiAdapter } from '@/adapters/pagination'

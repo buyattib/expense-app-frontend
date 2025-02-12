@@ -2,8 +2,9 @@ import { useRef } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { LoaderCircleIcon } from 'lucide-react'
 
-import { useAuthStore, useUserStore } from '@/store'
-import { refresh } from '@/features/auth'
+import { useAuthStore } from '@/store/auth'
+import { useUserStore } from '@/store/user'
+import { refresh } from '@/features/auth/services'
 
 export function AuthWrapper({ children }: { children: React.ReactNode }) {
 	// on app mount, it will get the token from local storage

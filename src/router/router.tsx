@@ -4,29 +4,59 @@ import { LoaderCircleIcon } from 'lucide-react'
 
 import { PUBLIC_ROUTES, PRIVATE_ROUTES } from './routes'
 
+import { PublicLayout } from '@/components/layout/public-layout'
+import { PrivateLayout } from '@/components/layout/private-layout'
+
 // Public Pages
-import { Login, Confirm, EmailSent, AuthType } from '@/pages/auth'
-import { NotFound } from '@/pages/not-found'
+import { Login } from '@/pages/auth/login'
+import { EmailSent } from '@/pages/auth/email-sent'
+import { ConfirmContainer as Confirm } from '@/pages/auth/confirm'
+import { NotFound } from '@/pages/not-found/not-found'
 
 // Protected Pages
-const Dashboard = lazy(async () => ({ default: (await import('@/pages/dashboard')).Dashboard })) // or export default
-const Settings = lazy(async () => ({ default: (await import('@/pages/settings')).Settings }))
-const Accounts = lazy(async () => ({ default: (await import('@/pages/accounts')).Accounts }))
-const Transactions = lazy(async () => ({
-	default: (await import('@/pages/transactions')).Transactions,
+const Dashboard = lazy(async () => ({
+	default: (await import('@/pages/dashboard/dashboard')).Dashboard,
+})) // or export default
+const Settings = lazy(async () => ({
+	default: (await import('@/pages/settings/settings')).Settings,
 }))
+const Accounts = lazy(async () => ({
+	default: (await import('@/pages/accounts/accounts')).Accounts,
+}))
+const Transactions = lazy(async () => ({
+	default: (await import('@/pages/transactions/transactions')).Transactions,
+}))
+
+const publicRoutes = [
+	{ path: PUBLIC_ROUTES.LOGIN, component: Login },
+	{ path: PUBLIC_ROUTES.EMAIL_SENT, component: EmailSent },
+	{
+		path: PUBLIC_ROUTES.CONFIRM,
+		component: Confirm,
+	},
+]
+
+const protectedRoutes = [
+	{ path: PRIVATE_ROUTES.INDEX, component: Dashboard },
+	{ path: PRIVATE_ROUTES.DASHBOARD, component: Dashboard },
+	{ path: PRIVATE_ROUTES.ACCOUNTS, component: Accounts },
+	{ path: PRIVATE_ROUTES.TRANSACTIONS, component: Transactions },
+	{ path: PRIVATE_ROUTES.SETTINGS, component: Settings },
+]
 
 export function Router() {
 	return (
 		<Switch>
-			<Route path={PUBLIC_ROUTES.LOGIN} component={Login} />
-			<Route path={PUBLIC_ROUTES.EMAIL_SENT} component={EmailSent} />
-			<Route
-				path={PUBLIC_ROUTES.CONFIRM}
-				component={props => {
-					return <Confirm authType={props.params.authType as AuthType} />
-				}}
-			/>
+			{publicRoutes.map(route => {
+				const Component = route.component
+				return (
+					<Route path={route.path} key={route.path}>
+						<PublicLayout>
+							<Component />
+						</PublicLayout>
+					</Route>
+				)
+			})}
 
 			<Suspense
 				fallback={
@@ -35,11 +65,16 @@ export function Router() {
 					</div>
 				}
 			>
-				<Route path={PRIVATE_ROUTES.INDEX} component={Dashboard} />
-				<Route path={PRIVATE_ROUTES.DASHBOARD} component={Dashboard} />
-				<Route path={PRIVATE_ROUTES.ACCOUNTS} component={Accounts} />
-				<Route path={PRIVATE_ROUTES.TRANSACTIONS} component={Transactions} />
-				<Route path={PRIVATE_ROUTES.SETTINGS} component={Settings} />
+				{protectedRoutes.map(route => {
+					const Component = route.component
+					return (
+						<Route path={route.path} key={route.path}>
+							<PrivateLayout>
+								<Component />
+							</PrivateLayout>
+						</Route>
+					)
+				})}
 			</Suspense>
 
 			<Route component={NotFound} />

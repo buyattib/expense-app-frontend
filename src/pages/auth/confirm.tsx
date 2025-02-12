@@ -1,17 +1,25 @@
-import { Redirect, useSearch } from 'wouter'
+import { Redirect, useParams, useSearch } from 'wouter'
 import { useQuery } from '@tanstack/react-query'
 import { toast } from 'sonner'
 
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from '@/router/routes'
-import { useAuthStore, useUserStore } from '@/store'
+import { useAuthStore } from '@/store/auth'
+import { useUserStore } from '@/store/user'
 
-import { AUTH_TYPE, auth, type AuthType } from '@/features/auth'
+import { AUTH_TYPE } from '@/features/auth/constants'
+import { auth } from '@/features/auth/services'
+import { type AuthType } from '@/features/auth/types'
 
 type Props = {
 	authType: AuthType
 }
 
-export function Confirm({ authType }: Props) {
+export function ConfirmContainer() {
+	const params = useParams()
+	return <Confirm authType={params.authType as AuthType} />
+}
+
+function Confirm({ authType }: Props) {
 	const updateAuthStore = useAuthStore(state => state.update)
 	const updateUserStore = useUserStore(state => state.update)
 

@@ -18,7 +18,9 @@ import {
 } from '@/components/ui/card'
 import { CustomFormInput } from '@/components/custom-form-input'
 
-import { LoginSchema, loginSchema, emailLink } from '@/features/auth'
+import { LoginSchema } from '@/features/auth/types'
+import { loginSchema } from '@/features/auth/schemas'
+import { emailLink } from '@/features/auth/services'
 
 const loginInitialValues = {
 	email: '',

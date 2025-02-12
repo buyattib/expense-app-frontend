@@ -1,4 +1,4 @@
-import { api } from '@/services'
+import { api } from '@/services/api'
 
 import { UserApi } from './types'
 import { userAdapter } from './adapters'

@@ -1,16 +1,18 @@
 import { Redirect } from 'wouter'
 
-import { useUserStore, useAuthStore } from '@/store'
+import { useAuthStore } from '@/store/auth'
+import { useUserStore } from '@/store/user'
 
-import { PUBLIC_ROUTES, usePrivateRoute } from '@/router'
+import { PUBLIC_ROUTES } from '@/router/routes'
+import { usePrivateRoute } from '@/router/hooks'
 
 export function RoutesGuard({ children }: { children: React.ReactNode }) {
-	const store = useAuthStore()
+	const auth = useAuthStore()
 	const user = useUserStore(store => store.user)
 
 	const isPrivateRoute = usePrivateRoute()
 
-	const isLoggedIn = !!store.accessToken && !!store.refreshToken && !!user?.id && !!user?.email
+	const isLoggedIn = !!auth.accessToken && !!auth.refreshToken && !!user?.id && !!user?.email
 
 	if (!isLoggedIn && isPrivateRoute) {
 		return <Redirect to={PUBLIC_ROUTES.LOGIN} />

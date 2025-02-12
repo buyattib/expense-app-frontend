@@ -1,8 +1,9 @@
 import { Link, useLocation } from 'wouter'
 import { ArrowLeftRightIcon, BookIcon, LogOutIcon, SettingsIcon } from 'lucide-react'
 
-import { PRIVATE_ROUTES } from '@/router'
-import { useAuthStore, useUserStore } from '@/store'
+import { PRIVATE_ROUTES } from '@/router/routes'
+import { useAuthStore } from '@/store/auth'
+import { useUserStore } from '@/store/user'
 
 import {
 	Sidebar,

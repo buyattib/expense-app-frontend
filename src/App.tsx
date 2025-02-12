@@ -1,10 +1,14 @@
 import { Toaster } from '@/components/ui/sonner'
 
-import { ErrorBoundary } from '@/components/error-boundary'
+import { ErrorBoundary } from '@/components/error-boundary/error-boundary'
 
-import { QueryProvider, ThemeProvider, AuthWrapper, RoutesGuard, InitialData } from './context'
-import { Router } from './router'
-import { Layout } from './components/layout'
+import { QueryProvider } from './context/query-provider'
+import { ThemeProvider } from './context/theme-provider'
+import { AuthWrapper } from './context/auth-wrapper'
+import { RoutesGuard } from './context/routes-guard'
+import { InitialData } from './context/initial-data'
+
+import { Router } from './router/router'
 
 function App() {
 	return (
@@ -14,10 +18,8 @@ function App() {
 					<AuthWrapper>
 						<RoutesGuard>
 							<InitialData />
-							<Layout>
-								<Router />
-								<Toaster richColors={true} />
-							</Layout>
+							<Router />
+							<Toaster richColors={true} />
 						</RoutesGuard>
 					</AuthWrapper>
 				</ThemeProvider>

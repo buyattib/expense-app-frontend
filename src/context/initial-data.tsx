@@ -1,9 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import { toast } from 'sonner'
 
-import { useGlobalStore, useUserStore, useAuthStore } from '@/store'
+import { useGlobalStore } from '@/store/global'
+import { useUserStore } from '@/store/user'
+import { useAuthStore } from '@/store/auth'
 
-import { getCurrencies, getAccountTypes } from '@/features/account'
+import { getCurrencies, getAccountTypes } from '@/features/account/services'
 
 export function InitialData() {
 	const store = useAuthStore()

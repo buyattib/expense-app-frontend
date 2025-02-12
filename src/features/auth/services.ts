@@ -1,4 +1,4 @@
-import { api } from '@/services'
+import { api } from '@/services/api'
 
 import { AuthBody, AuthResponseApi, EmailLinkBody, EmailLinkResponse, TokenBody } from './types'
 import { authResponseAdapter } from './adapters'

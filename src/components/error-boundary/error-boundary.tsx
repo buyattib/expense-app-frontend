@@ -1,5 +1,5 @@
 import { Component, ErrorInfo } from 'react'
-import { GlobalError } from '@/pages/global-error'
+import { GlobalError } from '@/pages/global-error/global-error'
 
 interface ErrorBoundaryState {
 	hasError: boolean
